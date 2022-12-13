@@ -21,7 +21,6 @@ uppy.on('complete', (result) => {
 })
 
 
-
 const Home: NextPage = () => {
 
   return (
