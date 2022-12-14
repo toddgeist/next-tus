@@ -10,9 +10,12 @@ const file = fs.createReadStream(path);
 
 const options = {
   endpoint: "http://localhost:3000/api/upload",
+  retryDelays: [0, 3000, 5000, 10000, 20000],
+
   metadata: {
     filename: "test.png",
-    filetype: "image/png"
+    filetype: "image/png",
+    other: "ok"
   },
   onError(error) {
     console.error("An error occurred:");
@@ -23,8 +26,8 @@ const options = {
     const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
     console.log(bytesUploaded, bytesTotal, `${percentage}%`);
   },
-  onSuccess() {
-    console.log("Upload finished:", upload.url);
+  onSuccess(data) {
+    console.log("Upload finished", data);
   }
 };
 

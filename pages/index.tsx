@@ -7,19 +7,22 @@ import '@uppy/dashboard/dist/style.css'
 
 
 const uppy = new Uppy({
-  meta: { type: 'avatar' },
+  meta: { type: 'avatar', },
   restrictions: { maxNumberOfFiles: 1 },
-  autoProceed: true,
-  debug: true,
+
+
 })
 
-uppy.use(Tus, { endpoint: '/api/upload' })
+uppy.use(Tus, { endpoint: '/api/upload', })
 
 uppy.on('complete', (result) => {
   const url = result.successful[0].uploadURL
   console.log('file uploaded ' + url)
 })
 
+uppy.on('upload-success', (file, response) => {
+  console.log('successful files:', file)
+})
 
 const Home: NextPage = () => {
 
@@ -29,5 +32,4 @@ const Home: NextPage = () => {
     />
   )
 }
-
 export default Home
